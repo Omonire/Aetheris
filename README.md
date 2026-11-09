@@ -61,6 +61,32 @@ docker run --rm -p 5000:5000 -v "$PWD/data:/app/data" aetheris
 
 The `data` volume persists posts, users, and settings between runs.
 
+### Vercel
+
+Vercel auto-detects the Flask app from `requirements.txt` and the `app` object
+in `app.py` — no `api/` wrapper is needed.
+
+```bash
+npm i -g vercel
+vercel login
+vercel link --project aetheris-template
+vercel deploy --prod
+```
+
+Set these project environment variables for production:
+
+| Variable | Purpose |
+| --- | --- |
+| `AETHERIS_SECRET` | Flask session secret (use a long random value) |
+| `AETHERIS_SITE_URL` | Public origin for canonical/OG URLs |
+| `AETHERIS_DATA_DIR` | Optional writable directory for `db.json` |
+
+On Vercel the JSON store automatically moves to `/tmp/aetheris` because the
+deployment filesystem is read-only. Serverless `/tmp` is ephemeral, so admin
+edits are per-instance and do not persist across cold starts — use
+`AETHERIS_DATA_DIR` with a persistent volume or swap `store.py` for a real
+database if you need durable writes.
+
 ## Styling with FSCSS
 
 Aetheris is styled with [FSCSS](https://fscss.devtem.org/docs) by Omonire/Figsh.

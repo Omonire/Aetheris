@@ -19,7 +19,16 @@ from pathlib import Path
 from typing import Any
 
 BASE_DIR = Path(__file__).resolve().parent
-DATA_DIR = BASE_DIR / "data"
+
+# Vercel (and most serverless platforms) mount the project read-only, so the
+# JSON store must live in /tmp there. Local runs keep using ./data.
+_env_data_dir = os.environ.get("AETHERIS_DATA_DIR")
+if _env_data_dir:
+    DATA_DIR = Path(_env_data_dir)
+elif os.environ.get("VERCEL"):
+    DATA_DIR = Path("/tmp") / "aetheris"
+else:
+    DATA_DIR = BASE_DIR / "data"
 DB_PATH = DATA_DIR / "db.json"
 
 _LOCK = threading.Lock()
