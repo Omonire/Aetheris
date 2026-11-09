@@ -1,0 +1,90 @@
+{% extends "admin/base.html" %}
+{% from "_icons.html" import icon %}
+
+{% block content %}
+<section class="stat-grid">
+  <article class="stat-card glass-card">
+    <span class="stat-icon">{{ icon('article', 22) }}</span>
+    <span class="stat-label">Total posts</span>
+    <strong class="stat-value">{{ stats.posts }}</strong>
+  </article>
+  <article class="stat-card glass-card">
+    <span class="stat-icon">{{ icon('check', 22) }}</span>
+    <span class="stat-label">Published</span>
+    <strong class="stat-value">{{ stats.published }}</strong>
+  </article>
+  <article class="stat-card glass-card">
+    <span class="stat-icon">{{ icon('edit', 22) }}</span>
+    <span class="stat-label">Drafts</span>
+    <strong class="stat-value">{{ stats.drafts }}</strong>
+  </article>
+  <article class="stat-card glass-card">
+    <span class="stat-icon">{{ icon('chart', 22) }}</span>
+    <span class="stat-label">Total views</span>
+    <strong class="stat-value">{{ "{:,}".format(stats.views) }}</strong>
+  </article>
+</section>
+
+<div class="admin-grid">
+  <section class="table-card glass-card">
+    <div class="table-head">
+      <div>
+        <h2>Recent posts</h2>
+        <p class="muted">The latest content across the site.</p>
+      </div>
+      <a class="link-arrow" href="{{ url_for('admin_posts') }}">View all {{ icon('arrow-right', 16) }}</a>
+    </div>
+    <div class="table-scroll">
+      <table class="data-table">
+        <thead>
+          <tr><th scope="col">Title</th><th scope="col">Status</th><th scope="col">Views</th></tr>
+        </thead>
+        <tbody>
+          {% for post in posts %}
+          <tr>
+            <td>
+              <div class="cell-strong">{{ post.title }}</div>
+              <div class="cell-muted">{{ post.author }} · {{ post.date }}</div>
+            </td>
+            <td>
+              {% if post.status == 'Published' %}
+                <span class="badge badge-green">Published</span>
+              {% else %}
+                <span class="badge badge-muted">Draft</span>
+              {% endif %}
+            </td>
+            <td>{{ "{:,}".format(post.views) }}</td>
+          </tr>
+          {% else %}
+          <tr><td colspan="3" class="cell-muted">No posts yet.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <aside class="side-stack">
+    <div class="info-card glass-card">
+      <h2>Team</h2>
+      <strong class="stat-value">{{ stats.users }}</strong>
+      <p class="muted">team members</p>
+      <a class="link-arrow" href="{{ url_for('admin_users') }}">Manage users {{ icon('arrow-right', 16) }}</a>
+    </div>
+    <div class="info-card glass-card">
+      <h2>Quick actions</h2>
+      <div class="quick-actions">
+        <a class="btn btn-primary btn-block" href="{{ url_for('admin_post_new') }}">{{ icon('plus', 16) }} New post</a>
+        <a class="btn btn-ghost btn-block" href="{{ url_for('admin_users') }}">{{ icon('group', 16) }} Add user</a>
+        <a class="btn btn-ghost btn-block" href="{{ url_for('admin_settings') }}">{{ icon('settings', 16) }} Edit settings</a>
+      </div>
+    </div>
+    <div class="info-card glass-card">
+      <h2>Attendance demo</h2>
+      <p class="muted">Open a sample session to see persistence in action.</p>
+      <div class="quick-actions">
+        <a class="btn btn-ghost btn-block" href="{{ url_for('session_view', attendance_id='12345678') }}">Session 12345678</a>
+      </div>
+    </div>
+  </aside>
+</div>
+{% endblock %}

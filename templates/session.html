@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+
+{% block content %}
+<section class="page-hero page-hero-split">
+  <div>
+    <span class="eyebrow">{{ icon('fact_check', 15) }} Attendance</span>
+    <h1>Session {{ attendance_id }}</h1>
+    <p>Live attendance for this session. Present and approval status update as records change.</p>
+  </div>
+  <div class="page-hero-actions">
+    <a class="btn btn-primary" href="{{ url_for('session_update', attendance_id=attendance_id) }}">
+      {{ icon('edit', 16) }} Update attendance
+    </a>
+  </div>
+</section>
+
+<section class="section section-tight">
+  <div class="table-card glass-card">
+    <div class="table-head">
+      <div>
+        <h2>Roster</h2>
+        <p class="muted">{{ students|length }} students in this session</p>
+      </div>
+    </div>
+    <div class="table-scroll">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th scope="col">Student</th>
+            <th scope="col">Attendance</th>
+            <th scope="col">Approval</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for s in students %}
+          <tr>
+            <td>
+              <div class="cell-strong">{{ s.name }}</div>
+              <div class="cell-muted">{{ s.student_id }}</div>
+            </td>
+            <td>
+              {% if s.present %}
+                <span class="badge badge-green">{{ icon('check', 14) }} Present</span>
+              {% else %}
+                <span class="badge badge-muted">{{ icon('x', 14) }} Absent</span>
+              {% endif %}
+            </td>
+            <td>
+              {% if s.approval == 'approved' %}
+                <span class="badge badge-green">Approved</span>
+              {% elif s.approval == 'rejected' %}
+                <span class="badge badge-red">Rejected</span>
+              {% else %}
+                <span class="badge badge-amber">Pending</span>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+{% endblock %}

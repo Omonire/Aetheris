@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+
+{% block content %}
+<section class="page-hero page-hero-split">
+  <div>
+    <span class="eyebrow">{{ icon('book', 15) }} Interactive learning</span>
+    <h1>Aetheris Lessons</h1>
+    <p>Read, take the quiz, and track your progress. Everything is stored locally in your browser — no account needed.</p>
+  </div>
+  <div class="page-hero-actions">
+    <button id="reset-progress-btn" class="btn btn-ghost btn-sm">{{ icon('bolt', 16) }} Reset progress</button>
+  </div>
+</section>
+
+<section class="section section-tight">
+  <div class="learn-layout">
+    <aside class="learn-sidebar glass-card">
+      <div class="sidebar-block">
+        <h2>Course outline</h2>
+        <p class="muted">Pick a lesson to view content and take its quiz.</p>
+      </div>
+      <div class="lesson-list" id="lesson-list"><!-- populated by JS --></div>
+      <div class="progress-block">
+        <div class="progress-label">
+          <span>Progress</span>
+          <span id="progress-text">0/0 completed</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="progress-bar"></div></div>
+        <div class="progress-label">
+          <span>Total score</span>
+          <span id="score-text">0</span>
+        </div>
+      </div>
+    </aside>
+
+    <section class="learn-main">
+      <div class="lesson-header glass-card">
+        <div>
+          <span id="lesson-badge" class="chip">Lesson</span>
+          <h2 id="lesson-title">Loading…</h2>
+          <p id="lesson-desc" class="muted">&nbsp;</p>
+        </div>
+        <div class="best-score">
+          <span class="muted">Best score</span>
+          <strong id="best-score">0</strong>
+        </div>
+      </div>
+
+      <div class="lesson-grid">
+        <div class="lesson-content glass-card">
+          <h3>What you'll learn</h3>
+          <ul id="lesson-content" class="lesson-points"><!-- populated by JS --></ul>
+        </div>
+
+        <aside class="lesson-tips glass-card">
+          <h3>Lesson tips</h3>
+          <ul class="tips-list">
+            <li>{{ icon('check', 16) }} Read the objectives first.</li>
+            <li>{{ icon('check', 16) }} Take the quiz to lock it in.</li>
+            <li>{{ icon('check', 16) }} Reset only affects this browser.</li>
+          </ul>
+        </aside>
+      </div>
+
+      <div class="quiz-card glass-card">
+        <div class="quiz-head">
+          <h3>Quick quiz</h3>
+          <span id="quiz-status" class="muted">Not attempted</span>
+        </div>
+        <form id="quiz-form" class="quiz-form"><!-- populated by JS --></form>
+        <div class="quiz-actions">
+          <button id="submit-quiz-btn" type="button" class="btn btn-primary">Submit answers</button>
+          <button id="next-lesson-btn" type="button" class="btn btn-ghost is-hidden">Next lesson {{ icon('arrow-right', 16) }}</button>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
+
+<script type="application/json" id="lessons-data">{{ lessons|tojson }}</script>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/learn.js') }}" defer></script>
+{% endblock %}

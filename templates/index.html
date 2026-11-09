@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-glow hero-glow-a" aria-hidden="true"></div>
+  <div class="hero-glow hero-glow-b" aria-hidden="true"></div>
+
+  <div class="hero-copy reveal">
+    <span class="pill pill-beta">{{ icon('heart', 15) }} Free &amp; open source — MIT licensed</span>
+    <h1 class="hero-title">
+      Learn, teach, and track — <span class="text-gradient">without the lock-in.</span>
+    </h1>
+    <p class="hero-text">
+      Aetheris is a lightweight, self-hostable platform for interactive courses,
+      attendance sessions, and content publishing. One Python app, any operating
+      system, zero license fees.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="{{ url_for('learn') }}">Start learning {{ icon('arrow-right', 18) }}</a>
+      <a class="btn btn-ghost" href="{{ url_for('courses') }}">Browse courses</a>
+    </div>
+    <ul class="hero-points">
+      <li>{{ icon('check', 16) }} No account required for lessons</li>
+      <li>{{ icon('check', 16) }} Runs on Windows, macOS, Linux &amp; Docker</li>
+      <li>{{ icon('check', 16) }} Styled with FSCSS</li>
+    </ul>
+  </div>
+
+  <div class="hero-visual reveal">
+    <div class="mock-window glass-card" id="hero-mockup">
+      <div class="mock-topbar">
+        <span class="dot dot-red"></span><span class="dot dot-amber"></span><span class="dot dot-green"></span>
+        <span class="mock-title">aetheris · dashboard</span>
+      </div>
+      <div class="mock-body">
+        <div class="mock-stats">
+          <div class="mock-stat">
+            <span class="mock-stat-label">Active sessions</span>
+            <span class="mock-stat-value">12</span>
+          </div>
+          <div class="mock-stat">
+            <span class="mock-stat-label">Lessons</span>
+            <span class="mock-stat-value">3</span>
+          </div>
+          <div class="mock-stat">
+            <span class="mock-stat-label">Uptime</span>
+            <span class="mock-stat-value">99.9%</span>
+          </div>
+        </div>
+        <div class="mock-chart" aria-hidden="true">
+          <span style="--h: 42%"></span><span style="--h: 64%"></span><span style="--h: 38%"></span>
+          <span style="--h: 78%"></span><span style="--h: 56%"></span><span style="--h: 88%"></span>
+          <span style="--h: 70%"></span><span style="--h: 96%"></span><span style="--h: 60%"></span>
+        </div>
+        <div class="mock-row">
+          <span class="badge badge-green">Present</span>
+          <span class="mock-row-text">Ada Lovelace · approved</span>
+        </div>
+        <div class="mock-row">
+          <span class="badge badge-amber">Pending</span>
+          <span class="mock-row-text">Grace Hopper · approval</span>
+        </div>
+      </div>
+    </div>
+    <div class="floating-card glass-card parallax-layer" data-speed="0.04">
+      <span class="floating-emoji">{{ icon('bolt', 18) }}</span>
+      <div>
+        <strong>Zero setup</strong>
+        <span>pip install &amp; run</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="marquee-section" aria-label="What you can build">
+  <div class="marquee">
+    <div class="marquee-track">
+      <span>Interactive lessons</span><span>Quizzes</span><span>Attendance</span>
+      <span>Approvals</span><span>Publishing</span><span>Analytics</span>
+      <span>SEO ready</span><span>FSCSS</span><span>Open source</span>
+      <span>Interactive lessons</span><span>Quizzes</span><span>Attendance</span>
+      <span>Approvals</span><span>Publishing</span><span>Analytics</span>
+      <span>SEO ready</span><span>FSCSS</span><span>Open source</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="features">
+  <div class="section-head reveal">
+    <span class="eyebrow">Everything included</span>
+    <h2>One tiny app. A full toolkit.</h2>
+    <p>Aetheris bundles the pieces educators and small teams actually use, without a subscription or a sprawling stack.</p>
+  </div>
+
+  <div class="feature-grid">
+    <article class="feature-card glass-card reveal">
+      <span class="feature-icon">{{ icon('book', 24) }}</span>
+      <h3>Interactive lessons</h3>
+      <p>Read, answer, and get instant feedback. Progress is tracked per lesson in the browser.</p>
+    </article>
+    <article class="feature-card glass-card reveal">
+      <span class="feature-icon">{{ icon('fact_check', 24) }}</span>
+      <h3>Attendance sessions</h3>
+      <p>Mark present or absent, then approve or reject with a single form. Data persists to disk.</p>
+    </article>
+    <article class="feature-card glass-card reveal">
+      <span class="feature-icon">{{ icon('article', 24) }}</span>
+      <h3>Content manager</h3>
+      <p>Create, edit, publish, and archive posts from a clean admin dashboard.</p>
+    </article>
+    <article class="feature-card glass-card reveal">
+      <span class="feature-icon">{{ icon('chart', 24) }}</span>
+      <h3>Simple analytics</h3>
+      <p>See post counts, views, drafts, and team size at a glance — no external trackers.</p>
+    </article>
+    <article class="feature-card glass-card reveal">
+      <span class="feature-icon">{{ icon('globe', 24) }}</span>
+      <h3>SEO ready</h3>
+      <p>Meta tags, Open Graph, JSON-LD, canonical URLs, a sitemap, and robots.txt out of the box.</p>
+    </article>
+    <article class="feature-card glass-card reveal">
+      <span class="feature-icon">{{ icon('shield', 24) }}</span>
+      <h3>Runs anywhere</h3>
+      <p>Pure Python + Flask. Use Windows, macOS, Linux, or Docker — same commands, same result.</p>
+    </article>
+  </div>
+</section>
+
+<section class="section section-free" id="free">
+  <div class="free-card glass-card reveal">
+    <div class="free-copy">
+      <span class="eyebrow">{{ icon('heart', 15) }} Free forever</span>
+      <h2>Open source, MIT licensed, yours to keep.</h2>
+      <p>
+        No paywalls, no seats, no telemetry. Fork it, self-host it, rebrand it, and
+        ship it. Aetheris is developed in the open and free for personal and
+        commercial use.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://github.com/Omonire/Aetheris" rel="noopener">
+          {{ icon('github', 18) }} View on GitHub
+        </a>
+        <a class="btn btn-ghost" href="{{ url_for('courses') }}">Explore the courses</a>
+      </div>
+    </div>
+    <ul class="free-points">
+      <li>{{ icon('check', 18) }} <span><strong>MIT License</strong> — use it commercially</span></li>
+      <li>{{ icon('check', 18) }} <span><strong>No account</strong> needed to learn</span></li>
+      <li>{{ icon('check', 18) }} <span><strong>Self-host</strong> with one command</span></li>
+      <li>{{ icon('check', 18) }} <span><strong>Your data</strong> stays on your machine</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="courses-preview">
+  <div class="section-head reveal">
+    <span class="eyebrow">Courses</span>
+    <h2>Start with the fundamentals.</h2>
+    <p>Practical, hands-on tracks that pair with the source of this very app.</p>
+  </div>
+  <div class="course-grid">
+    {% for course in courses %}
+    <article class="course-card glass-card reveal {{ 'is-soon' if not course.available }}">
+      <div class="course-top">
+        <span class="feature-icon">{{ icon(course.icon, 22) }}</span>
+        <span class="chip">{{ course.level }}</span>
+      </div>
+      <h3>{{ course.title }}</h3>
+      <p>{{ course.summary }}</p>
+      {% if course.available %}
+        <a class="link-arrow" href="{{ url_for('learn') }}">Start course {{ icon('arrow-right', 16) }}</a>
+      {% else %}
+        <span class="link-muted">Coming soon</span>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+{% if featured_posts %}
+<section class="section" id="updates">
+  <div class="section-head reveal">
+    <span class="eyebrow">From the team</span>
+    <h2>Latest updates.</h2>
+  </div>
+  <div class="post-grid">
+    {% for post in featured_posts %}
+    <article class="post-card glass-card reveal">
+      <span class="chip">{{ post.category }}</span>
+      <h3>{{ post.title }}</h3>
+      <p>{{ post.body[:160] }}{% if post.body|length > 160 %}…{% endif %}</p>
+      <div class="post-meta">
+        <span>{{ post.author }}</span>
+        <span>{{ post.date }}</span>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<section class="section section-cta">
+  <div class="cta-card glass-card reveal">
+    <h2>Ready to try it?</h2>
+    <p>Jump into a lesson right now, or spin up the admin and make it your own.</p>
+    <div class="hero-actions center">
+      <a class="btn btn-primary btn-lg" href="{{ url_for('learn') }}">Start learning</a>
+      <a class="btn btn-ghost btn-lg" href="{{ url_for('admin_dashboard') }}">Open admin</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Aetheris">
+  <defs>
+    <linearGradient id="aetheris-g" x1="10" y1="8" x2="54" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8b93ff"/>
+      <stop offset="1" stop-color="#4cd7f6"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="#0b0d17"/>
+  <rect x="1" y="1" width="62" height="62" rx="15" fill="none" stroke="#ffffff" stroke-opacity="0.08"/>
+  <path d="M32 12l4.6 10.9L48 27l-8.7 7.1L41.6 46 32 39.8 22.4 46l2.3-11.9L16 27l11.4-4.1z" fill="url(#aetheris-g)"/>
+  <circle cx="32" cy="32" r="4.6" fill="#0b0d17"/>
+</svg>

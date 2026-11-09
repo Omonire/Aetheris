@@ -1,0 +1,59 @@
+{% extends "admin/base.html" %}
+{% from "_icons.html" import icon %}
+
+{% block content %}
+<section class="table-card glass-card">
+  <div class="table-head">
+    <div>
+      <h2>All posts</h2>
+      <p class="muted">{{ posts|length }} post{{ '' if posts|length == 1 else 's' }} total</p>
+    </div>
+    <a class="btn btn-primary btn-sm" href="{{ url_for('admin_post_new') }}">{{ icon('plus', 16) }} New post</a>
+  </div>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">Author</th>
+          <th scope="col">Category</th>
+          <th scope="col">Status</th>
+          <th scope="col">Views</th>
+          <th scope="col" class="col-actions">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for post in posts %}
+        <tr>
+          <td>
+            <div class="cell-strong">{{ post.title }}</div>
+            <div class="cell-muted">slug: {{ post.slug }}</div>
+          </td>
+          <td>{{ post.author }}</td>
+          <td><span class="chip">{{ post.category }}</span></td>
+          <td>
+            {% if post.status == 'Published' %}
+              <span class="badge badge-green">Published</span>
+            {% else %}
+              <span class="badge badge-muted">Draft</span>
+            {% endif %}
+          </td>
+          <td>{{ "{:,}".format(post.views) }}</td>
+          <td class="col-actions">
+            <div class="row-actions">
+              <a class="icon-btn" href="{{ url_for('admin_post_edit', post_id=post.id) }}" title="Edit">{{ icon('edit', 18) }}</a>
+              <form method="post" action="{{ url_for('admin_post_delete', post_id=post.id) }}" onsubmit="return confirm('Delete this post?');">
+                <button type="submit" class="icon-btn icon-btn-danger" title="Delete">{{ icon('trash', 18) }}</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="6" class="cell-muted">No posts yet. Create your first post.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

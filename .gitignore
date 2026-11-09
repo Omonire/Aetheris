@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.Python
+
+# Local data (seeded automatically on first run)
+data/db.json
+instance/
+
+# Tooling
+node_modules/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log

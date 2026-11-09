@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+
+{% block content %}
+<section class="page-hero">
+  <span class="eyebrow">Course catalog</span>
+  <h1>Courses built for makers.</h1>
+  <p>Each course is a short, interactive track. Lessons include a quick quiz so you can check your understanding as you go.</p>
+</section>
+
+<section class="section section-tight">
+  <div class="course-grid">
+    {% for course in courses %}
+    <article class="course-card glass-card reveal {{ 'is-soon' if not course.available }}">
+      <div class="course-top">
+        <span class="feature-icon">{{ icon(course.icon, 22) }}</span>
+        <div class="course-badges">
+          <span class="chip">{{ course.level }}</span>
+          {% if course.available %}
+            <span class="badge badge-green">Available</span>
+          {% else %}
+            <span class="badge badge-muted">Soon</span>
+          {% endif %}
+        </div>
+      </div>
+      <h2>{{ course.title }}</h2>
+      <p>{{ course.summary }}</p>
+      <div class="course-meta">
+        <span>{{ icon('book', 16) }} {{ course.lesson_ids|length }} lessons</span>
+      </div>
+      {% if course.available %}
+        <a class="btn btn-primary btn-block" href="{{ url_for('learn') }}">Start course {{ icon('arrow-right', 16) }}</a>
+      {% else %}
+        <button class="btn btn-ghost btn-block" disabled>Coming soon</button>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head reveal">
+    <span class="eyebrow">Lesson preview</span>
+    <h2>What you'll cover.</h2>
+  </div>
+  <div class="lesson-preview-grid">
+    {% for lesson in lessons %}
+    <article class="lesson-preview glass-card reveal">
+      <span class="chip">{{ lesson.badge }}</span>
+      <h3>{{ lesson.title }}</h3>
+      <p>{{ lesson.desc }}</p>
+      <ul class="check-list">
+        {% for point in lesson.content %}
+        <li>{{ icon('check', 16) }} <span>{{ point|striptags }}</span></li>
+        {% endfor %}
+      </ul>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+
+{% block content %}
+<section class="page-hero page-hero-split">
+  <div>
+    <span class="eyebrow">{{ icon('edit', 15) }} Attendance</span>
+    <h1>Update session {{ attendance_id }}</h1>
+    <p>For each student choose present or absent, then approve, reject, or leave pending.</p>
+  </div>
+  <div class="page-hero-actions">
+    <a class="btn btn-ghost" href="{{ url_for('session_view', attendance_id=attendance_id) }}">
+      {{ icon('arrow-right', 16) }} View session
+    </a>
+  </div>
+</section>
+
+<section class="section section-tight">
+  <form method="post" action="{{ url_for('session_update', attendance_id=attendance_id) }}" class="table-card glass-card">
+    <div class="table-head">
+      <div>
+        <h2>Live editing</h2>
+        <p class="muted">{{ students|length }} students · changes are saved to disk</p>
+      </div>
+    </div>
+    <div class="table-scroll">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th scope="col">Student</th>
+            <th scope="col">Attendance</th>
+            <th scope="col">Approval</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for s in students %}
+          <tr>
+            <td>
+              <div class="cell-strong">{{ s.name }}</div>
+              <div class="cell-muted">{{ s.student_id }}</div>
+            </td>
+            <td>
+              <div class="radio-row">
+                <label><input type="radio" name="present_{{ s.student_id }}" value="1" {% if s.present %}checked{% endif %} /> Present</label>
+                <label><input type="radio" name="present_{{ s.student_id }}" value="0" {% if not s.present %}checked{% endif %} /> Absent</label>
+              </div>
+            </td>
+            <td>
+              <div class="radio-row">
+                <label><input type="radio" name="approval_{{ s.student_id }}" value="approved" {% if s.approval == 'approved' %}checked{% endif %} /> Approve</label>
+                <label><input type="radio" name="approval_{{ s.student_id }}" value="rejected" {% if s.approval == 'rejected' %}checked{% endif %} /> Reject</label>
+                <label><input type="radio" name="approval_{{ s.student_id }}" value="pending" {% if s.approval == 'pending' %}checked{% endif %} /> Pending</label>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="table-foot">
+      <p class="muted">Submitting applies the changes to this session.</p>
+      <button type="submit" class="btn btn-primary">{{ icon('check', 16) }} Save attendance</button>
+    </div>
+  </form>
+</section>
+{% endblock %}

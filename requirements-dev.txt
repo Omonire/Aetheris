@@ -1,0 +1,4 @@
+-r requirements.txt
+# FSCSS compiler (Figured Shorthand CSS). Requires Node.js 20+ on PATH.
+# Only needed to rebuild static/css/main.css from static/fscss/main.fscss.
+fscss>=0.1.0

@@ -1,0 +1,58 @@
+{% extends "admin/base.html" %}
+{% from "_icons.html" import icon %}
+
+{% block content %}
+<form method="post" action="{{ form_action }}" class="form-card glass-card">
+  <div class="form-head">
+    <div>
+      <h2>{{ 'Edit post' if post else 'New post' }}</h2>
+      <p class="muted">Write the content, then save as a draft or publish it.</p>
+    </div>
+    <a class="btn btn-ghost btn-sm" href="{{ url_for('admin_posts') }}">Cancel</a>
+  </div>
+
+  <div class="form-grid">
+    <label class="field field-wide">
+      <span>Title</span>
+      <input type="text" name="title" value="{{ post.title if post }}" required maxlength="160" placeholder="A clear, descriptive title" />
+    </label>
+
+    <label class="field">
+      <span>Slug</span>
+      <input type="text" name="slug" value="{{ post.slug if post }}" placeholder="auto-generated-from-title" />
+    </label>
+
+    <label class="field">
+      <span>Author</span>
+      <input type="text" name="author" value="{{ post.author if post else 'Omonire' }}" />
+    </label>
+
+    <label class="field">
+      <span>Category</span>
+      <input type="text" name="category" value="{{ post.category if post else 'General' }}" />
+    </label>
+
+    <label class="field">
+      <span>Status</span>
+      <select name="status">
+        <option value="Draft" {{ 'selected' if post and post.status == 'Draft' }}>Draft</option>
+        <option value="Published" {{ 'selected' if post and post.status == 'Published' }}>Published</option>
+      </select>
+    </label>
+
+    <label class="field">
+      <span>Date</span>
+      <input type="date" name="date" value="{{ post.date if post }}" />
+    </label>
+
+    <label class="field field-wide">
+      <span>Body</span>
+      <textarea name="body" rows="10" placeholder="Write your post…">{{ post.body if post }}</textarea>
+    </label>
+  </div>
+
+  <div class="form-foot">
+    <button type="submit" class="btn btn-primary">{{ icon('check', 16) }} {{ 'Save changes' if post else 'Create post' }}</button>
+  </div>
+</form>
+{% endblock %}

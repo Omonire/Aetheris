@@ -1,0 +1,49 @@
+{% extends "admin/base.html" %}
+{% from "_icons.html" import icon %}
+
+{% block content %}
+<form method="post" action="{{ url_for('admin_settings') }}" class="form-card glass-card">
+  <div class="form-head">
+    <div>
+      <h2>Site settings</h2>
+      <p class="muted">Identity and SEO defaults used across public pages.</p>
+    </div>
+  </div>
+
+  <div class="form-grid">
+    <label class="field">
+      <span>Site title</span>
+      <input type="text" name="site_title" value="{{ settings.site_title }}" />
+    </label>
+    <label class="field">
+      <span>Social handle</span>
+      <input type="text" name="social_handle" value="{{ settings.social_handle }}" />
+    </label>
+
+    <label class="field field-wide">
+      <span>Tagline</span>
+      <input type="text" name="tagline" value="{{ settings.tagline }}" />
+    </label>
+
+    <label class="field field-wide">
+      <span>Meta description</span>
+      <textarea name="description" rows="3">{{ settings.description }}</textarea>
+    </label>
+
+    <label class="field field-wide">
+      <span>Keywords</span>
+      <input type="text" name="keywords" value="{{ settings.keywords }}" />
+    </label>
+
+    <label class="field field-wide">
+      <span>robots.txt</span>
+      <textarea name="robots" rows="5">{{ settings.robots }}</textarea>
+      <small class="muted">A Sitemap line is appended automatically.</small>
+    </label>
+  </div>
+
+  <div class="form-foot">
+    <button type="submit" class="btn btn-primary">{{ icon('check', 16) }} Save settings</button>
+  </div>
+</form>
+{% endblock %}

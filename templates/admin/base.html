@@ -1,0 +1,66 @@
+{% from "_icons.html" import icon %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ page_title or 'Admin - Aetheris' }}</title>
+  <meta name="description" content="{{ page_description or 'Aetheris admin.' }}" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0b0d17" />
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/logo.svg') }}" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+</head>
+<body class="admin-body">
+  <aside class="admin-sidebar">
+    <div class="admin-brand">
+      <a class="brand" href="{{ url_for('index') }}">
+        <span class="brand-mark">{{ icon('spark', 20) }}</span>
+        <span class="brand-name">Aetheris</span>
+      </a>
+      <span class="admin-tag">Admin</span>
+    </div>
+
+    <nav class="admin-nav" aria-label="Admin">
+      <a href="{{ url_for('admin_dashboard') }}" class="{{ 'is-active' if active_page == 'dashboard' }}">{{ icon('dashboard', 20) }} Dashboard</a>
+      <a href="{{ url_for('admin_posts') }}" class="{{ 'is-active' if active_page == 'posts' }}">{{ icon('article', 20) }} Posts</a>
+      <a href="{{ url_for('admin_users') }}" class="{{ 'is-active' if active_page == 'users' }}">{{ icon('group', 20) }} Users</a>
+      <a href="{{ url_for('admin_settings') }}" class="{{ 'is-active' if active_page == 'settings' }}">{{ icon('settings', 20) }} Settings</a>
+    </nav>
+
+    <div class="admin-sidebar-foot">
+      <a href="{{ url_for('index') }}">{{ icon('arrow-up-right', 18) }} View public site</a>
+      <span class="admin-version">v{{ app_version }} · free &amp; open source</span>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <div>
+        <span class="admin-eyebrow">Aetheris workspace</span>
+        <h1>{{ page_title or 'Admin' }}</h1>
+      </div>
+      <div class="admin-topbar-actions">
+        <a class="btn btn-ghost btn-sm" href="{{ url_for('index') }}">{{ icon('globe', 16) }} Public site</a>
+        <a class="btn btn-primary btn-sm" href="{{ url_for('admin_post_new') }}">{{ icon('plus', 16) }} New post</a>
+      </div>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-stack" role="status" aria-live="polite">
+          {% for category, message in messages %}
+            <div class="flash flash-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <script src="{{ url_for('static', filename='js/site.js') }}" defer></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

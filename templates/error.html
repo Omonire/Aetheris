@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+
+{% block content %}
+<section class="error-page">
+  <span class="error-code">{{ code }}</span>
+  <h1>{{ message }}</h1>
+  <p>The link may be broken, or the page may have moved.</p>
+  <div class="hero-actions center">
+    <a class="btn btn-primary" href="{{ url_for('index') }}">Back home</a>
+    <a class="btn btn-ghost" href="{{ url_for('courses') }}">Browse courses</a>
+  </div>
+</section>
+{% endblock %}

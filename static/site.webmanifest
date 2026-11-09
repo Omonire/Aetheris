@@ -1,0 +1,18 @@
+{
+  "name": "Aetheris",
+  "short_name": "Aetheris",
+  "description": "A free, open-source learning platform with interactive lessons, quizzes, and local progress tracking.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0b0d17",
+  "theme_color": "#0b0d17",
+  "icons": [
+    {
+      "src": "/static/img/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
