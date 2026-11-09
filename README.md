@@ -81,6 +81,18 @@ The stylesheet uses FSCSS variables (`$token` / `$token!`), shorthands (`bg`,
 reusable `@define cardpad(...)`. FSCSS is not SCSS: selectors are written flat,
 without nesting.
 
+## Testing
+
+Python 3.11+ is recommended (CI covers 3.11 and 3.12).
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+The suite exercises every public and admin route, SEO endpoints, static
+assets, attendance updates, and post/user/settings CRUD. GitHub Actions runs it
+on Windows, macOS, and Linux.
+
 ## Project structure
 
 ```text
@@ -89,6 +101,7 @@ store.py             JSON persistence and first-run seed data
 content.py           Courses and interactive lesson data
 build_css.py         Compile main.fscss -> main.css
 run.bat / run.sh     Cross-platform launchers
+tests/               Standard-library smoke tests
 templates/           Jinja templates (public + admin)
 static/fscss/        FSCSS source
 static/css/          Compiled CSS (committed)
