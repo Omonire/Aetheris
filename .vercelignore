@@ -1,5 +1,6 @@
 .git
 .github
+.freebuff
 .venv
 venv
 env
@@ -13,3 +14,4 @@ tests
 .DS_Store
 Thumbs.db
 *.log
+requirements-dev.txt

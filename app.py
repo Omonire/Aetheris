@@ -29,8 +29,15 @@ from content import COURSES, LESSONS, lesson_by_id
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = os.environ.get("AETHERIS_SECRET", "dev-only-change-me")
+DEFAULT_SECRET = "dev-only-change-me"
+app.config["SECRET_KEY"] = os.environ.get("AETHERIS_SECRET", DEFAULT_SECRET)
 app.config["SITE_URL"] = os.environ.get("AETHERIS_SITE_URL", "").rstrip("/")
+
+if os.environ.get("VERCEL") and app.config["SECRET_KEY"] == DEFAULT_SECRET:
+    app.logger.warning(
+        "AETHERIS_SECRET is unset; falling back to the insecure development key. "
+        "Set AETHERIS_SECRET in your Vercel project environment variables."
+    )
 
 VERSION = "1.0.0"
 
